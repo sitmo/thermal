@@ -1,4 +1,4 @@
-"""Console script for thermal."""
+"""Run the console script for thermal."""
 
 import click
 
