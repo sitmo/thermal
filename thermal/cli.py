@@ -1,11 +1,11 @@
-"""Run the console script for thermal."""
+"""The console script for thermal."""
 
 import click
 
 
 @click.command()
 def main():
-    """Main entrypoint."""
+    """Run the main entrypoint."""
     click.echo("thermal")
     click.echo("=" * len("thermal"))
     click.echo("Surrogate timeseries generation")
