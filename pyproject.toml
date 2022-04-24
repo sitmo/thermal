@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "thermal"
-version = "0.3.0"
+version = "0.4.0"
 homepage = "https://github.com/sitmo/thermal"
 description = "Surrogate times eries generation."
 authors = ["Thijs van den Berg <thijs@sitmo.com>"]
