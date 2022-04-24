@@ -6,22 +6,42 @@ from scipy.stats import anderson_ksamp, ks_2samp
 from thermal.resample._interface import _ResampleInterface
 
 
-def _generic_test(original, surrogates, tester, num_tests=1000):
-    p_values = []
+def _surrogates_generator(surrogates, num_tests=100):
     if isinstance(surrogates, _ResampleInterface):
         for _ in range(num_tests):
             s = surrogates.resample()
-            p_values.append(tester(original, s))
+            yield s
     elif isinstance(surrogates, list):
         for s in surrogates:
-            p_values.append(tester(original, s))
+            yield s
     elif isinstance(surrogates, np.ndarray):
         for i in range(surrogates.shape[1]):
             s = surrogates[:, i]
-            p_values.append(tester(original, s))
+            yield s
     else:
         raise ValueError('Unknown surrogates argument type.')
+
+
+def _generic_test(original, surrogates, tester, num_tests=1000):
+    p_values = []
+    for s in _surrogates_generator(surrogates, num_tests):
+        p_values.append(tester(original, s))
     return p_values
+
+
+def _generic_adversarial_test(original, surrogates, tester, tester2=None, num_tests=100, num_repeats=4):
+    inner_p_values = []
+    cross_p_values = []
+    hn = int(len(original) / 2)
+    for s in _surrogates_generator(surrogates, num_tests):
+        for r in range(num_repeats):
+            np.random.shuffle(original)
+            np.random.shuffle(s)
+            inner_p_values.append(tester(original[:hn], original[hn : 2 * hn]))
+            cross_p_values.append(tester(original[:hn], s[:hn]))
+    if tester2 is None:
+        tester2 = tester
+    return tester2(inner_p_values, cross_p_values), inner_p_values, cross_p_values
 
 
 def _ks_test_func(a, b):
@@ -46,12 +66,17 @@ def ks_test(original, surrogates, *, num_tests=1000):
     Array of p-values.
 
     """
-    return _generic_test(original, surrogates, _ks_test_func, num_tests)
+    return _generic_test(original, surrogates, _ks_test_func, num_tests=num_tests)
 
 
-def _anderson_test_func(a, b):
+def _anderson_test_sig_func(a, b):
     statistic, critical_values, significance_level = anderson_ksamp([a, b])
     return significance_level
+
+
+def _anderson_test_stat_func(a, b):
+    statistic, critical_values, significance_level = anderson_ksamp([a, b])
+    return statistic
 
 
 def anderson_test(original, surrogates, *, num_tests=1000):
@@ -73,8 +98,4 @@ def anderson_test(original, surrogates, *, num_tests=1000):
     Array of significance level values.
 
     """
-    return _generic_test(original, surrogates, _anderson_test_func, num_tests)
-
-
-def adversarial_anderson_test(original, surrogates, *, num_tests=1000):
-    pass
+    return _generic_test(original, surrogates, _anderson_test_sig_func, num_tests)
