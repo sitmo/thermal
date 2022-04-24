@@ -1,7 +1,8 @@
+"""Resample interface definition."""
 from abc import ABC, abstractmethod
 
 
-class ResampleInterface(ABC):
+class _ResampleInterface(ABC):
     @abstractmethod
     def fit(self, x, *args, **kwargs):
         raise NotImplementedError

@@ -1,9 +1,11 @@
+"""Pytest module to test interfaces."""
 import numpy as np
 
 from thermal import ResampleGmm, ResampleHist, ResampleKde
 
 
 def test_resample_gmm_interface():
+    """Testing the ResampleGmm interface."""
     x = np.random.normal(size=10)
 
     eng = ResampleGmm()
@@ -27,6 +29,7 @@ def test_resample_gmm_interface():
 
 
 def test_resample_hist_interface():
+    """Testing the ResampleHist inerface."""
     x = np.random.normal(size=10)
 
     eng = ResampleHist()
@@ -43,6 +46,7 @@ def test_resample_hist_interface():
 
 
 def test_resample_kde_interface():
+    """Testing the ResampleKde interface."""
     x = np.random.normal(size=10)
 
     eng = ResampleKde()

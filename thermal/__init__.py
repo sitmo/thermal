@@ -5,3 +5,4 @@ __email__ = 'thijs@sitmo.com'
 __version__ = '0.3.0'
 
 from thermal.resample import ResampleGmm, ResampleHist, ResampleKde
+from thermal.stats import anderson_test, ks_test

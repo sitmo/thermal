@@ -1,25 +1,23 @@
-"""Gaussian Mixture Model Resampling."""
+"""Gaussian Mixture Model based fitting and Resampling."""
 
 # Author: Thijs van den Berg <thijs@sitmo.com>
 # License: MIT
 
 from sklearn.mixture import GaussianMixture
 
-from thermal.resample._interface import ResampleInterface
+from thermal.resample._interface import _ResampleInterface
 
 
-class ResampleGmm(ResampleInterface):
+class ResampleGmm(_ResampleInterface):
     """Resample using Gaussian Mixtures.
 
     Parameters
     ----------
-
     n_components : int, default=3
         The number of mixture components.
 
     Attributes
     ----------
-
     size_ : int
         The default number of samples to generate.
     gmm_ : sklearn.mixture.GaussianMixture object.
@@ -59,7 +57,6 @@ class ResampleGmm(ResampleInterface):
         self : object
             The fitted Gaussian Mixtures Resampler.
         """
-
         self.size_ = len(x)
         self.gmm_ = GaussianMixture(n_components=self.n_components_).fit(x.reshape(-1, 1))
         return self
@@ -70,7 +67,7 @@ class ResampleGmm(ResampleInterface):
         Parameters
         ----------
         size : int, default=None
-            Number of samples to generate. When omitted the number of samples will be tthe same as
+            Number of samples to generate. When omitted the number of samples will be the same as
             the number of samples used to fit.
 
         Returns
