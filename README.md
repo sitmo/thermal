@@ -1,5 +1,8 @@
 # thermal
 
+Model Free Surrogate timeseries Generation.
+
+
 
 [![pypi](https://img.shields.io/pypi/v/thermal.svg)](https://pypi.org/project/thermal/)
 [![python](https://img.shields.io/pypi/pyversions/thermal.svg)](https://pypi.org/project/thermal/)
@@ -7,8 +10,6 @@
 [![codecov](https://codecov.io/gh/sitmo/thermal/branch/main/graphs/badge.svg)](https://codecov.io/github/sitmo/thermal)
 
 
-
-Surrogate timeseries generation
 
 
 * Documentation: <https://sitmo.github.io/thermal>

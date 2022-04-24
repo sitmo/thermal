@@ -3,10 +3,11 @@
 name = "thermal"
 version = "0.3.0"
 homepage = "https://github.com/sitmo/thermal"
-description = "Surrogate timeseries generation."
+description = "Surrogate times eries generation."
 authors = ["Thijs van den Berg <thijs@sitmo.com>"]
 readme = "README.md"
 license =  "MIT"
+
 classifiers=[
     'Development Status :: 2 - Pre-Alpha',
     'Intended Audience :: Developers',
@@ -16,13 +17,14 @@ classifiers=[
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
 ]
+
 packages = [
     { include = "thermal" },
     { include = "tests", format = "sdist" },
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.8.0,<4.0"
+python = ">=3.8.0,<3.11"
 click = "8.0.4"
 
 black  = { version = "^22.3.0", optional = false}
@@ -35,18 +37,20 @@ pytest-cov  = { version = "^2.12.0", optional = true}
 tox  = { version = "^3.20.1", optional = true}
 virtualenv  = { version = "^20.2.2", optional = true}
 pip  = { version = "^20.3.1", optional = true}
-mkdocs  = { version = "^1.1.2", optional = true}
-mkdocs-include-markdown-plugin  = { version = "^1.0.0", optional = true}
-mkdocs-material  = { version = "^6.1.7", optional = true}
-mkdocstrings  = { version = "^0.15.2", optional = true}
-mkdocs-material-extensions  = { version = "^1.0.1", optional = true}
+
+Sphinx = "^4.5.0"
+sphinx-rtd-theme = "^1.0.0"
+myst-parser = "^0.17.2"
+
 twine  = { version = "^3.3.0", optional = true}
-mkdocs-autorefs = {version = "^0.2.1", optional = true}
 pre-commit = {version = "^2.12.0", optional = true}
 toml = {version = "^0.10.2", optional = true}
 bump2version = {version = "^1.0.1", optional = true}
 numpy = "^1.22.3"
 sklearn = "^0.0"
+scipy = "^1.8.0"
+
+
 
 [tool.poetry.extras]
 test = [
@@ -61,14 +65,9 @@ test = [
 
 dev = ["tox", "pre-commit", "virtualenv", "pip", "twine", "toml", "bump2version"]
 
-doc = [
-    "mkdocs",
-    "mkdocs-include-markdown-plugin",
-    "mkdocs-material",
-    "mkdocstrings",
-    "mkdocs-material-extension",
-    "mkdocs-autorefs"
-    ]
+
+docs = ["sphinx", "sphinx_rtd_theme"]
+
 
 [tool.poetry.scripts]
 thermal = 'thermal.cli:main'

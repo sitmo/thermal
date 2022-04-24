@@ -1,31 +1,28 @@
 import numpy as np
 
+from thermal.resample._interface import ResampleInterface
 
-class ResampleKde:
+
+class ResampleKde(ResampleInterface):
     def __init__(self, x=None):
-        self.x = None
-        self.mu = 0.0
-        self.sigma = 1.0
-        self.kernel_width = 0.1
+        self.x_ = None
+        self.mu_ = 0.0
+        self.sigma_ = 1.0
+        self.kernel_width_ = 0.1
         if x is not None:
             self.fit(x)
 
-    def fit(self, x):
-        self.size = len(x)
-        self.x = x
-        self.mu = np.mean(x)
-        self.sigma = np.std(x, ddof=1)
-        self.kernel_width = 1.06 * self.sigma * len(x) ** -0.2
-        pass
+    def fit(self, x, **kwargs):
+        self.size_ = len(x)
+        self.x_ = x
+        self.mu_ = np.mean(x)
+        self.sigma__ = np.std(x, ddof=1)
+        self.kernel_width_ = 1.06 * self.sigma_ * len(x) ** -0.2
+        return self
 
-    def resample(self, size=None):
+    def resample(self, size=None, **kwargs):
         if size is None:
-            size = self.size
-        ans = np.random.choice(self.x, size=size, replace=True) + self.kernel_width * np.random.normal(size=size)
-        ans = self.mu + (ans - self.mu) * self.sigma * (self.sigma**2 + self.kernel_width**2) ** -0.5
+            size = self.size_
+        ans = np.random.choice(self.x_, size=size, replace=True) + self.kernel_width_ * np.random.normal(size=size)
+        ans = self.mu_ + (ans - self.mu_) * self.sigma_ * (self.sigma_**2 + self.kernel_width_**2) ** -0.5
         return ans
-
-
-def resample_kde(x, size=None):
-    eng = ResampleKde(x)
-    return eng.resample(size=size)

@@ -2,6 +2,9 @@ site_name: thermal
 site_url: https://sitmo.github.io/thermal
 repo_url: https://github.com/sitmo/thermal
 repo_name: sitmo/thermal
+site_author: Thijs van den Berg
+#copyright: Copyright &copy; 2022, Thijs van den Berg
+
 #strict: true
 nav:
   - Home: index.md
@@ -10,22 +13,13 @@ nav:
   - Modules: api.md
   - Contributing: contributing.md
   - Changelog: changelog.md
+
 theme:
-  name: material
-  language: en
-  #logo: assets/logo.png
-  palette:
-    scheme: preference
-    primary: indigo
-    accent: indigo
-  features:
-    - navigation.indexes
-    - navigation.instant
-    - navigation.tabs.sticky
+    name: readthedocs
+    locale: en
+    custom_dir: custom_theme/
+
 markdown_extensions:
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.critic
   - pymdownx.caret
   - pymdownx.mark
@@ -45,31 +39,15 @@ markdown_extensions:
       permalink: true
       slugify: !!python/name:pymdownx.slugs.uslugify
   - meta
+
 plugins:
   - include-markdown
   - search:
       lang: en
   - mkdocstrings:
+      handlers:
+        python:
+          rendering:
+            show_root_heading: yes
       watch:
         - thermal
-extra:
-  social:
-    - icon: fontawesome/brands/twitter
-      # replace with your own tweet link below
-      link: https://github.com/waynerv/cookiecutter-pypackage
-      name: Tweet
-    - icon: fontawesome/brands/facebook
-      # replace with your own facebook link below
-      link: https://github.com/waynerv/cookiecutter-pypackage
-      name: Facebook
-    - icon: fontawesome/brands/github
-      link: https://github.com/sitmo/thermal
-      name: Github
-    - icon: material/email
-      link: "mailto:thijs@sitmo.com"
-  # to enable disqus, uncomment the following and put your disqus id below
-  # disqus: disqus_id
-# uncomment the following and put your google tracking id below to enable GA
-#google_analytics:
-  #- UA-xxx
-  #- auto

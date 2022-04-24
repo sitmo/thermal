@@ -1,24 +1,89 @@
+"""Gaussian Mixture Model Resampling."""
+
+# Author: Thijs van den Berg <thijs@sitmo.com>
+# License: MIT
+
 from sklearn.mixture import GaussianMixture
 
+from thermal.resample._interface import ResampleInterface
 
-class ResampleGmm:
-    def __init__(self, x=None, *, n_components=3):
-        self.size = len(x)
-        self.n_components = n_components
-        if x is not None:
-            self.fit(x, n_components=n_components)
 
-    def fit(self, x, *, n_components=3):
-        self.n_components = n_components
-        self.gmm = GaussianMixture(n_components=2).fit(x.reshape(-1, 1))
+class ResampleGmm(ResampleInterface):
+    """Resample using Gaussian Mixtures.
 
-    def resample(self, size=None):
+    Parameters
+    ----------
+
+    n_components : int, default=3
+        The number of mixture components.
+
+    Attributes
+    ----------
+
+    size_ : int
+        The default number of samples to generate.
+    gmm_ : sklearn.mixture.GaussianMixture object.
+        The Gaussian Mixture model.
+
+    Example
+    -------
+    ::
+
+        import numpy as np
+        import thermal as th
+
+        x = np.random.normal(size=10)
+        s = th.ResampleGmm(3).fit(x).resample()
+
+        s
+        >>> array([ 0.01212549,  0.04772549,  0.08693959, ..., -0.00519905,
+           -0.00908192,  0.00756048])
+
+    """
+
+    def __init__(self, n_components=3):
+        self.size_ = 1
+        self.gmm_ = None
+        self.n_components_ = n_components
+
+    def fit(self, x, **kwargs):
+        """Estimate model parameters of the Gaussian Mixtures Resampler.
+
+        Parameters
+        ----------
+        x : array-like of shape (n_samples)
+            List of data points.
+
+        Returns
+        -------
+        self : object
+            The fitted Gaussian Mixtures Resampler.
+        """
+
+        self.size_ = len(x)
+        self.gmm_ = GaussianMixture(n_components=self.n_components_).fit(x.reshape(-1, 1))
+        return self
+
+    def resample(self, size=None, **kwargs):
+        """Generate random samples.
+
+        Parameters
+        ----------
+        size : int, default=None
+            Number of samples to generate. When omitted the number of samples will be tthe same as
+            the number of samples used to fit.
+
+        Returns
+        -------
+        X : array, shape (n_samples)
+            Randomly generated sample.
+        """
+        if self.gmm_ is None:
+            raise ValueError(
+                "This ResampleGmm instance is not fitted yet. Call 'fit' with "
+                "appropriate arguments before using this resampler. "
+            )
         if size is None:
-            size = self.size
-        samples = self.gmm.sample(n_samples=size)
+            size = self.size_
+        samples = self.gmm_.sample(n_samples=size)
         return samples[0].flatten()
-
-
-def resample_gmm(x, size=None, *, n_components=3):
-    eng = ResampleGmm(x, n_components=n_components)
-    return eng.resample(size=size)
