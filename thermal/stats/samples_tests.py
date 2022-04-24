@@ -74,3 +74,7 @@ def anderson_test(original, surrogates, *, num_tests=1000):
 
     """
     return _generic_test(original, surrogates, _anderson_test_func, num_tests)
+
+
+def adversarial_anderson_test(original, surrogates, *, num_tests=1000):
+    pass

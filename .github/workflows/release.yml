@@ -54,13 +54,13 @@ jobs:
       - name: build documentation
         run: |
           poetry install -E doc
-          poetry run mkdocs build
+          poetry run make html
 
       - name: publish documentation
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./site
+          publish_dir: ./docs/_build/html
 
       - name: Build wheels and source tarball
         run: >-

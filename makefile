@@ -26,5 +26,5 @@ clean:
 	rm -rf .tox dist site
 	rm -rf coverage.xml .coverage
 
-docs:
-	poetry run mkdocs serve
+html:
+	poetry run sphinx-build -b html docs docs/_build/html
