@@ -28,3 +28,6 @@ clean:
 
 html:
 	poetry run sphinx-build -b html docs docs/_build/html
+
+version:
+	poetry run bump2version minor
