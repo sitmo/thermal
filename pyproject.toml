@@ -49,6 +49,7 @@ bump2version = {version = "^1.0.1", optional = true}
 numpy = "^1.22.3"
 sklearn = "^0.0"
 scipy = "^1.8.0"
+nbsphinx = "^0.8.8"
 
 
 
@@ -67,7 +68,7 @@ test = [
 dev = ["tox", "pre-commit", "virtualenv", "pip", "twine", "toml", "bump2version"]
 
 
-docs = ["sphinx", "sphinx_rtd_theme"]
+docs = ["sphinx", "sphinx_rtd_theme", "nbsphinx"]
 
 
 [tool.poetry.scripts]

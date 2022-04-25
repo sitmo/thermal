@@ -11,8 +11,8 @@ from thermal.resample._interface import _ResampleInterface
 class ResampleHist(_ResampleInterface):
     """Resample using Historical sampling, either with- or without- replacement."""
 
-    def __init__(self):
-        self.size_ = 1
+    def __init__(self, *args, **kwargs):
+        super(ResampleHist, self).__init__(*args, **kwargs)
         self.x_ = None
 
     def fit(self, x, **kwargs):
@@ -48,6 +48,7 @@ class ResampleHist(_ResampleInterface):
         X : array, shape (n_samples)
             Randomly drawen sample.
         """
+        self._check_fitted()
         if size is None:
             size = self.size_
         ans = np.random.choice(self.x_, size=size, replace=replace)

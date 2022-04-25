@@ -15,7 +15,7 @@ unittest:
 	pytest
 
 coverage:
-	pytest --cov=$(sources) --cov-branch --cov-report=term-missing tests
+	poetry run pytest --cov=$(sources) --cov-branch --cov-report=term-missing tests
 
 pre-commit:
 	pre-commit run --all-files
@@ -30,4 +30,4 @@ html:
 	poetry run sphinx-build -b html docs docs/_build/html
 
 version:
-	poetry run bump2version minor
+	poetry run bump2version patch

@@ -1,7 +1,13 @@
 """Pytest module to test interfaces."""
 import numpy as np
+import pytest
 
-from thermal import ResampleGmm, ResampleHist, ResampleKde
+from thermal import Resample, ResampleGmm, ResampleHist, ResampleKde
+
+
+def test_resample_abc():
+    obj = ResampleKde()
+    return obj.size_
 
 
 def test_resample_gmm_interface():
@@ -58,4 +64,20 @@ def test_resample_kde_interface():
     y = eng.resample()
 
     y = ResampleKde().fit(x).resample()
+    return y
+
+
+def test_resample_generic_interface():
+    """Testing the ResampleKde interface."""
+    x = np.random.normal(size=50)
+
+    y = Resample(amplitude='gmm', n_components=5).fit(x).resample(5)
+    y = Resample(amplitude='kde').fit(x).resample(5)
+    y = Resample(amplitude='hist').fit(x).resample(5, replace=True)
+
+    with pytest.raises(Exception):
+        y = Resample(amplitude='banana').fit(x).resample(5, replace=True)
+
+    with pytest.raises(Exception):
+        y = Resample(amplitude='gmm').resample(5, replace=True)
     return y

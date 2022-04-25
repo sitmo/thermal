@@ -9,7 +9,7 @@ You can contribute in many ways:
 
 ### Report Bugs
 
-Report bugs at https://github.com/sitmo/thermal/issues.
+Report bugs at <https://github.com/sitmo/thermal/issues>.
 
 If you are reporting a bug, please include:
 

@@ -17,14 +17,12 @@ class ResampleKde(_ResampleInterface):
         The estimated Kernel width.
     """
 
-    def __init__(self, x=None):
-        self.size_ = 0
+    def __init__(self, *args, **kwargs):
+        super(ResampleKde, self).__init__(*args, **kwargs)
         self.x_ = None
         self.mu_ = 0.0
         self.sigma_ = 1.0
         self.kernel_width_ = 0.0
-        if x is not None:
-            self.fit(x)
 
     def fit(self, x, **kwargs):
         """Estimate model parameters of the Kernel Density Resampler.
@@ -60,6 +58,7 @@ class ResampleKde(_ResampleInterface):
          x : array, shape (n_samples)
              Randomly generated sample.
         """
+        self._check_fitted()
         if size is None:
             size = self.size_
         ans = np.random.choice(self.x_, size=size, replace=True) + self.kernel_width_ * np.random.normal(size=size)
