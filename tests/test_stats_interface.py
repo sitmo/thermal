@@ -2,7 +2,7 @@
 import numpy as np
 import pytest
 
-from thermal import ResampleHist, anderson_test, ks_test
+from thermal import SampleHist, anderson_test, ks_test
 
 
 def test_ks_test_interface():
@@ -15,7 +15,7 @@ def test_ks_test_interface():
     s = [np.random.normal(size=10), np.random.normal(size=10), np.random.normal(size=10)]
     ans = anderson_test(x, s)
 
-    eng = ResampleHist()
+    eng = SampleHist()
     eng.fit(x)
     ans = anderson_test(x, eng)
 
@@ -32,7 +32,7 @@ def test_anderson_test_interface():
     s = [np.random.normal(size=10), np.random.normal(size=10), np.random.normal(size=10)]
     ans = ks_test(x, s)
 
-    eng = ResampleHist()
+    eng = SampleHist()
     eng.fit(x)
     ans = ks_test(x, eng)
 

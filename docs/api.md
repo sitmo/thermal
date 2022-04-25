@@ -6,25 +6,25 @@
 
 ### Resample
 ```{eval-rst}
-.. autoclass:: thermal.Resample
+.. autoclass:: thermal.Sample
     :members:
 ```
 
 ### ResampleGmm
 ```{eval-rst}
-.. autoclass:: thermal.ResampleGmm
+.. autoclass:: thermal.SampleGmm
     :members:
 ```
 
 ### ResampleHist
 ```{eval-rst}
-.. autoclass:: thermal.ResampleHist
+.. autoclass:: thermal.SampleHist
     :members:
 ```
 
 ### ResampleKde
 ```{eval-rst}
-.. autoclass:: thermal.ResampleKde
+.. autoclass:: thermal.SampleKde
     :members:
 ```
 

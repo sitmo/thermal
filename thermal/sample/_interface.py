@@ -2,9 +2,9 @@
 from abc import ABC, abstractmethod
 
 
-class _ResampleInterface(ABC):
+class _SampleInterface(ABC):
     def __init__(self, *args, **kwargs):
-        self.size_ = -1
+        self.n_samples_ = 0
         self.x_ = None
 
     @abstractmethod
@@ -12,9 +12,9 @@ class _ResampleInterface(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def resample(self, size=None, *args, **kwargs):
+    def sample(self, n_samples=None, *args, **kwargs):
         raise NotImplementedError
 
     def _check_fitted(self):
-        if self.size_ == -1:
-            raise ValueError('This resampler instance is not yet fitted.')
+        if self.n_samples_ == 0:
+            raise ValueError('This sampler instance is not yet fitted.')

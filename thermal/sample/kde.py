@@ -4,11 +4,13 @@
 # License: MIT
 
 import numpy as np
+from sklearn.model_selection import GridSearchCV, KFold
+from sklearn.neighbors import KernelDensity
 
-from thermal.resample._interface import _ResampleInterface
+from thermal.sample._interface import _SampleInterface
 
 
-class ResampleKde(_ResampleInterface):
+class SampleKde(_SampleInterface):
     """Resample using Kernel Density estimate.
 
     Attributes
@@ -17,12 +19,13 @@ class ResampleKde(_ResampleInterface):
         The estimated Kernel width.
     """
 
-    def __init__(self, *args, **kwargs):
-        super(ResampleKde, self).__init__(*args, **kwargs)
+    def __init__(self, cv=None, *args, **kwargs):
+        super(SampleKde, self).__init__(*args, **kwargs)
         self.x_ = None
         self.mu_ = 0.0
         self.sigma_ = 1.0
         self.kernel_width_ = 0.0
+        self.cv_ = cv
 
     def fit(self, x, **kwargs):
         """Estimate model parameters of the Kernel Density Resampler.
@@ -37,19 +40,26 @@ class ResampleKde(_ResampleInterface):
         self : object
             The fitted Kernel Density Resampler.
         """
-        self.size_ = len(x)
+        self.n_samples_ = len(x)
         self.x_ = x
         self.mu_ = np.mean(x)
         self.sigma_ = np.std(x, ddof=1)
         self.kernel_width_ = 1.06 * self.sigma_ * len(x) ** -0.2
+
+        bandwidths = self.kernel_width_ * np.logspace(-1, 1, 101)
+        if self.cv_ is not None:
+            grid = GridSearchCV(KernelDensity(kernel='gaussian'), {'bandwidth': bandwidths}, cv=KFold(self.cv_))
+            grid.fit(x.reshape(-1, 1))
+            self.kernel_width_ = grid.best_params_['bandwidth']
+
         return self
 
-    def resample(self, size=None, **kwargs):
+    def sample(self, n_samples=None, **kwargs):
         """Generate random samples.
 
         Parameters
         ----------
-         size : int, default=None
+         n_samples : int, default=None
              Number of samples to generate. When omitted the number of samples will be the same as
              the number of samples used to fit.
 
@@ -59,8 +69,16 @@ class ResampleKde(_ResampleInterface):
              Randomly generated sample.
         """
         self._check_fitted()
-        if size is None:
-            size = self.size_
-        ans = np.random.choice(self.x_, size=size, replace=True) + self.kernel_width_ * np.random.normal(size=size)
-        # ans = self.mu_ + (ans - self.mu_) * self.sigma_ * (self.sigma_**2 + self.kernel_width_**2) ** -0.5
+        if n_samples is None:
+            n_samples = self.n_samples_
+        ans = np.random.choice(self.x_, size=n_samples, replace=True) + self.kernel_width_ * np.random.normal(
+            size=n_samples
+        )
         return ans
+
+    def __str__(self):
+        """Make a user friendly string representation of a class."""
+        if self.cv_ is not None:
+            return f'ResampleKde(cv={self.cv_})'
+        else:
+            return 'ResampleKde()'

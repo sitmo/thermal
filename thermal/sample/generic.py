@@ -3,25 +3,26 @@
 # Author: Thijs van den Berg <thijs@sitmo.com>
 # License: MIT
 
-from sklearn.mixture import GaussianMixture
+from thermal.sample._interface import _SampleInterface
+from thermal.sample.gmm import SampleGmm
+from thermal.sample.hist import SampleHist
+from thermal.sample.kde import SampleKde
 
-from thermal.resample._interface import _ResampleInterface
 
-
-class ResampleGmm(_ResampleInterface):
-    """Resample using Gaussian Mixtures.
+class Sample(_SampleInterface):
+    """Generic resampling algorithm interface.
 
     Parameters
     ----------
+    amplitude : string, default='gmm'
+        The amplitude density resampling method.
     n_components : int, default=3
-        The number of mixture components.
+        The number of mixture components used when amplitude=='gmm.
 
     Attributes
     ----------
     size_ : int
         The default number of samples to generate.
-    gmm_ : sklearn.mixture.GaussianMixture object.
-        The Gaussian Mixture model.
 
     Example
     -------
@@ -31,7 +32,7 @@ class ResampleGmm(_ResampleInterface):
         import thermal as th
 
         x = np.random.normal(size=10)
-        s = th.ResampleGmm(3).fit(x).resample()
+        s = th.Resample().fit(x).sample()
 
         s
         >>> array([ 0.01212549,  0.04772549,  0.08693959, ..., -0.00519905,
@@ -39,11 +40,19 @@ class ResampleGmm(_ResampleInterface):
 
     """
 
-    def __init__(self, n_components=3, *args, **kwargs):
-        super(ResampleGmm, self).__init__(*args, **kwargs)
+    def __init__(self, amplitude='gmm', *, n_components=7, **kwargs):
+        super(Sample, self).__init__(**kwargs)
 
-        self.gmm_ = None
-        self.n_components_ = n_components
+        self.amplitude_ = amplitude
+
+        if amplitude == 'gmm':
+            self.amp_ = SampleGmm(n_components)
+        elif amplitude == 'kde':
+            self.amp_ = SampleKde()
+        elif amplitude == 'hist':
+            self.amp_ = SampleHist()
+        else:
+            raise ValueError(f'Unknown amplitude_method "{amplitude}".')
 
     def fit(self, x, **kwargs):
         """Estimate model parameters of the Gaussian Mixtures Resampler.
@@ -58,16 +67,15 @@ class ResampleGmm(_ResampleInterface):
         self : object
             The fitted Gaussian Mixtures Resampler.
         """
-        self.size_ = len(x)
-        self.gmm_ = GaussianMixture(n_components=self.n_components_).fit(x.reshape(-1, 1))
+        self.amp_.fit(x, **kwargs)
         return self
 
-    def resample(self, size=None, **kwargs):
+    def sample(self, n_samples=None, **kwargs):
         """Generate random samples.
 
         Parameters
         ----------
-        size : int, default=None
+        n_samples : int, default=None
             Number of samples to generate. When omitted the number of samples will be the same as
             the number of samples used to fit.
 
@@ -76,8 +84,8 @@ class ResampleGmm(_ResampleInterface):
         X : array, shape (n_samples)
             Randomly generated sample.
         """
-        self._check_fitted()
-        if size is None:
-            size = self.size_
-        samples = self.gmm_.sample(n_samples=size)
-        return samples[0].flatten()
+        return self.amp_.sample(n_samples=n_samples, **kwargs)
+
+    def __str__(self):
+        """Make a user friendly string representation of a class."""
+        return f'Resample:(amplitude={str(self.amp_)})'

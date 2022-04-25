@@ -3,13 +3,13 @@
 import numpy as np
 from scipy.stats import anderson_ksamp, ks_2samp
 
-from thermal.resample._interface import _ResampleInterface
+from thermal.sample._interface import _SampleInterface
 
 
 def _surrogates_generator(surrogates, num_tests=100):
-    if isinstance(surrogates, _ResampleInterface):
+    if isinstance(surrogates, _SampleInterface):
         for _ in range(num_tests):
-            s = surrogates.resample()
+            s = surrogates.sample()
             yield s
     elif isinstance(surrogates, list):
         for s in surrogates:
