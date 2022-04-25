@@ -43,21 +43,26 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">[0.6.1] - 2022-04-26</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#fixed">Fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">[0.6.3] - 2022-04-26</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#added">Added</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">[0.6.0] - 2022-04-25</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fixed">Fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">[0.6.2] - 2022-04-26</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id3">Fixed</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">[0.5.0] - 2022-04-26</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#added">Added</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">[0.6.0] - 2022-04-25</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id5">Fixed</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">[0.4.0] - 2022-04-25</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id6">[0.5.0] - 2022-04-26</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id7">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">[0.4.0] - 2022-04-25</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Added</a></li>
 </ul>
 </li>
 </ul>
@@ -92,42 +97,63 @@
   <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline"></a></h1>
 <section id="id1">
-<h2>[0.6.1] - 2022-04-26<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<h2>[0.6.3] - 2022-04-26<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Added friendly <strong>str</strong> for samplers.</p></li>
+<li><p>Added KFold CV option to KDE bandwidth selection for ResampleKde.</p></li>
+<li><p>Added BIC scan option for number of component selection in ResampleGmm.</p></li>
+<li><p>Example notebooks in the documentation</p></li>
+</ul>
+</section>
+</section>
 <section id="fixed">
-<h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline"></a></h3>
+<h2>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Refactored “Resample” to “Sample”, align with</p></li>
+<li><p>SamplerHist interface, moved “replace “arg to constructor.</p></li>
+<li><p>SamplerHist allow for repeated samples in case the number of
+drawn samples is larger than the source set.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>[0.6.2] - 2022-04-26<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<section id="id3">
+<h3>Fixed<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Documentation and coverage</p></li>
 </ul>
 </section>
 </section>
-<section id="id2">
-<h2>[0.6.0] - 2022-04-25<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
-<section id="id3">
-<h3>Fixed<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
+<section id="id4">
+<h2>[0.6.0] - 2022-04-25<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h2>
+<section id="id5">
+<h3>Fixed<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>version releases again</p></li>
 </ul>
 </section>
 </section>
-<section id="id4">
-<h2>[0.5.0] - 2022-04-26<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h2>
-<section id="added">
-<h3>Added<a class="headerlink" href="#added" title="Permalink to this headline"></a></h3>
+<section id="id6">
+<h2>[0.5.0] - 2022-04-26<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h2>
+<section id="id7">
+<h3>Added<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Generic Resample class.</p></li>
 </ul>
 </section>
-<section id="id5">
-<h3>Fixed<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
+<section id="id8">
+<h3>Fixed<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>version releases</p></li>
 </ul>
 </section>
 </section>
-<section id="id6">
-<h2>[0.4.0] - 2022-04-25<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h2>
-<section id="id7">
-<h3>Added<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h3>
+<section id="id9">
+<h2>[0.4.0] - 2022-04-25<a class="headerlink" href="#id9" title="Permalink to this headline"></a></h2>
+<section id="id10">
+<h3>Added<a class="headerlink" href="#id10" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>two-sample Kolmogorov–Smirnov test.</p></li>
 <li><p>two-sample Anderson–Darling test.</p></li>

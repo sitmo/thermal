@@ -91,8 +91,8 @@
 <section id="resample">
 <h3>Resample<a class="headerlink" href="#resample" title="Permalink to this headline"></a></h3>
 <dl class="py class">
-<dt class="sig sig-object py" id="thermal.Resample">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thermal.</span></span><span class="sig-name descname"><span class="pre">Resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amplitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gmm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.Resample" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.Sample">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thermal.</span></span><span class="sig-name descname"><span class="pre">Sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amplitude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gmm'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.Sample" title="Permalink to this definition"></a></dt>
 <dd><p>Generic resampling algorithm interface.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -103,8 +103,8 @@
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="thermal.Resample.size_">
-<span class="sig-name descname"><span class="pre">size_</span></span><a class="headerlink" href="#thermal.Resample.size_" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.Sample.size_">
+<span class="sig-name descname"><span class="pre">size_</span></span><a class="headerlink" href="#thermal.Sample.size_" title="Permalink to this definition"></a></dt>
 <dd><p>The default number of samples to generate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -118,7 +118,7 @@
 <span class="kn">import</span> <span class="nn">thermal</span> <span class="k">as</span> <span class="nn">th</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">Resample</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">Resample</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
 
 <span class="n">s</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">array</span><span class="p">([</span> <span class="mf">0.01212549</span><span class="p">,</span>  <span class="mf">0.04772549</span><span class="p">,</span>  <span class="mf">0.08693959</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00519905</span><span class="p">,</span>
@@ -126,8 +126,8 @@
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="thermal.Resample.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.Resample.fit" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.Sample.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.Sample.fit" title="Permalink to this definition"></a></dt>
 <dd><p>Estimate model parameters of the Gaussian Mixtures Resampler.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -143,12 +143,12 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="thermal.Resample.resample">
-<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.Resample.resample" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.Sample.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.Sample.sample" title="Permalink to this definition"></a></dt>
 <dd><p>Generate random samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>size</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of samples to generate. When omitted the number of samples will be the same as
+<dd class="field-odd"><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of samples to generate. When omitted the number of samples will be the same as
 the number of samples used to fit.</p>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -166,8 +166,8 @@ the number of samples used to fit.</p>
 <section id="resamplegmm">
 <h3>ResampleGmm<a class="headerlink" href="#resamplegmm" title="Permalink to this headline"></a></h3>
 <dl class="py class">
-<dt class="sig sig-object py" id="thermal.ResampleGmm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thermal.</span></span><span class="sig-name descname"><span class="pre">ResampleGmm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.ResampleGmm" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleGmm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thermal.</span></span><span class="sig-name descname"><span class="pre">SampleGmm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bayesian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.SampleGmm" title="Permalink to this definition"></a></dt>
 <dd><p>Resample using Gaussian Mixtures.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -175,8 +175,8 @@ the number of samples used to fit.</p>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="thermal.ResampleGmm.size_">
-<span class="sig-name descname"><span class="pre">size_</span></span><a class="headerlink" href="#thermal.ResampleGmm.size_" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleGmm.size_">
+<span class="sig-name descname"><span class="pre">size_</span></span><a class="headerlink" href="#thermal.SampleGmm.size_" title="Permalink to this definition"></a></dt>
 <dd><p>The default number of samples to generate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -186,8 +186,8 @@ the number of samples used to fit.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="thermal.ResampleGmm.gmm_">
-<span class="sig-name descname"><span class="pre">gmm_</span></span><a class="headerlink" href="#thermal.ResampleGmm.gmm_" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleGmm.gmm_">
+<span class="sig-name descname"><span class="pre">gmm_</span></span><a class="headerlink" href="#thermal.SampleGmm.gmm_" title="Permalink to this definition"></a></dt>
 <dd><p>The Gaussian Mixture model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -201,7 +201,7 @@ the number of samples used to fit.</p>
 <span class="kn">import</span> <span class="nn">thermal</span> <span class="k">as</span> <span class="nn">th</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">ResampleGmm</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">ResampleGmm</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
 
 <span class="n">s</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">array</span><span class="p">([</span> <span class="mf">0.01212549</span><span class="p">,</span>  <span class="mf">0.04772549</span><span class="p">,</span>  <span class="mf">0.08693959</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00519905</span><span class="p">,</span>
@@ -209,8 +209,8 @@ the number of samples used to fit.</p>
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="thermal.ResampleGmm.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.ResampleGmm.fit" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleGmm.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.SampleGmm.fit" title="Permalink to this definition"></a></dt>
 <dd><p>Estimate model parameters of the Gaussian Mixtures Resampler.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -226,12 +226,12 @@ the number of samples used to fit.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="thermal.ResampleGmm.resample">
-<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.ResampleGmm.resample" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleGmm.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.SampleGmm.sample" title="Permalink to this definition"></a></dt>
 <dd><p>Generate random samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>size</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of samples to generate. When omitted the number of samples will be the same as
+<dd class="field-odd"><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of samples to generate. When omitted the number of samples will be the same as
 the number of samples used to fit.</p>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -249,12 +249,17 @@ the number of samples used to fit.</p>
 <section id="resamplehist">
 <h3>ResampleHist<a class="headerlink" href="#resamplehist" title="Permalink to this headline"></a></h3>
 <dl class="py class">
-<dt class="sig sig-object py" id="thermal.ResampleHist">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thermal.</span></span><span class="sig-name descname"><span class="pre">ResampleHist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.ResampleHist" title="Permalink to this definition"></a></dt>
-<dd><p>Resample using Historical sampling, either with- or without- replacement.</p>
+<dt class="sig sig-object py" id="thermal.SampleHist">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thermal.</span></span><span class="sig-name descname"><span class="pre">SampleHist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.SampleHist" title="Permalink to this definition"></a></dt>
+<dd><p>Sample using Historical sampling, either with- or without- replacement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>replace</strong> (<em>boolean</em><em>, </em><em>default=True</em>) – Sample with- or without-  replacement.</p>
+</dd>
+</dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="thermal.ResampleHist.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.ResampleHist.fit" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleHist.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.SampleHist.fit" title="Permalink to this definition"></a></dt>
 <dd><p>Provide a set of samples that will be used to reample.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -270,13 +275,13 @@ the number of samples used to fit.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="thermal.ResampleHist.resample">
-<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.ResampleHist.resample" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleHist.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.SampleHist.sample" title="Permalink to this definition"></a></dt>
 <dd><p>Generate random samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>size</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of samples to generate. When omitted the number of samples will be the same as
+<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of samples to generate. When omitted the number of samples will be the same as
 the number of samples used to fit.</p></li>
 <li><p><strong>replace</strong> (<em>boolean</em><em>, </em><em>default=True</em>) – Sample with- or without- replacement.</p></li>
 </ul>
@@ -296,12 +301,12 @@ the number of samples used to fit.</p></li>
 <section id="resamplekde">
 <h3>ResampleKde<a class="headerlink" href="#resamplekde" title="Permalink to this headline"></a></h3>
 <dl class="py class">
-<dt class="sig sig-object py" id="thermal.ResampleKde">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thermal.</span></span><span class="sig-name descname"><span class="pre">ResampleKde</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.ResampleKde" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleKde">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thermal.</span></span><span class="sig-name descname"><span class="pre">SampleKde</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.SampleKde" title="Permalink to this definition"></a></dt>
 <dd><p>Resample using Kernel Density estimate.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="thermal.ResampleKde.kernel_width_">
-<span class="sig-name descname"><span class="pre">kernel_width_</span></span><a class="headerlink" href="#thermal.ResampleKde.kernel_width_" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleKde.kernel_width_">
+<span class="sig-name descname"><span class="pre">kernel_width_</span></span><a class="headerlink" href="#thermal.SampleKde.kernel_width_" title="Permalink to this definition"></a></dt>
 <dd><p>The estimated Kernel width.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -311,8 +316,8 @@ the number of samples used to fit.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="thermal.ResampleKde.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.ResampleKde.fit" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleKde.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.SampleKde.fit" title="Permalink to this definition"></a></dt>
 <dd><p>Estimate model parameters of the Kernel Density Resampler.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -328,12 +333,12 @@ the number of samples used to fit.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="thermal.ResampleKde.resample">
-<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.ResampleKde.resample" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="thermal.SampleKde.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thermal.SampleKde.sample" title="Permalink to this definition"></a></dt>
 <dd><p>Generate random samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>size</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of samples to generate. When omitted the number of samples will be the same as
+<dd class="field-odd"><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of samples to generate. When omitted the number of samples will be the same as
 the number of samples used to fit.</p>
 </dd>
 <dt class="field-even">Returns</dt>
