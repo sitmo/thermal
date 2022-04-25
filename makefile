@@ -8,8 +8,8 @@ format:
 	black $(sources) tests
 
 lint:
-	flake8 $(sources) tests
-	mypy $(sources) tests
+	poetry run flake8 $(sources) tests
+	poetry run mypy $(sources) tests
 
 unittest:
 	pytest

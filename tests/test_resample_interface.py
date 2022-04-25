@@ -1,4 +1,5 @@
 """Pytest module to test interfaces."""
+
 import numpy as np
 import pytest
 
@@ -6,6 +7,7 @@ from thermal import Resample, ResampleGmm, ResampleHist, ResampleKde
 
 
 def test_resample_abc():
+    """Testing the ABC size_ attribute."""
     obj = ResampleKde()
     return obj.size_
 
