@@ -7,7 +7,7 @@ import thermal as th
 
 
 def test_fitting_sampling():
-
+    """Testing samplers."""
     x = np.random.normal(size=100)
 
     resamplers = [
