@@ -119,7 +119,7 @@ class SampleGmm(_SampleInterface):
 
         Returns
         -------
-        X : array, shape (n_samples)
+        x : array, shape (n_samples)
             Randomly generated sample.
         """
         self._check_fitted()
@@ -130,4 +130,4 @@ class SampleGmm(_SampleInterface):
 
     def __str__(self):
         """Make a user friendly string representation of a class."""
-        return f'ResampleGmm(bayesian={self.bayesian_}, n_components={self.n_components_})'
+        return f'ResampleGmm({self.n_components_}, bayesian={self.bayesian_})'

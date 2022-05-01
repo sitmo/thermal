@@ -35,7 +35,28 @@
 .. autofunction:: thermal.anderson_test
 ```
 
+### autocorr
+```{eval-rst}
+.. autofunction:: thermal.autocorr
+```
+
+### hurst
+```{eval-rst}
+.. autofunction:: thermal.hurst
+```
+
 ### ks_test
 ```{eval-rst}
 .. autofunction:: thermal.ks_test
+```
+
+
+## Utilities
+
+### Exponential distribution
+```{eval-rst}
+.. autofunction:: thermal.exponential_fit_from_median
+.. autofunction:: thermal.exponential_fit_from_mean
+.. autofunction:: thermal.exponential_fit_from_quantile
+.. autofunction:: thermal.exponential_kmax_icdf
 ```

@@ -1,4 +1,4 @@
-"""Two sample test to test if two sets of samples are comming from the same distribution."""
+"""Two sample test to test if two sets of samples are coming from the same distribution."""
 
 import numpy as np
 from scipy.stats import anderson_ksamp, ks_2samp
@@ -26,7 +26,7 @@ def _generic_test(original, surrogates, tester, num_tests=1000):
     p_values = []
     for s in _surrogates_generator(surrogates, num_tests):
         p_values.append(tester(original, s))
-    return p_values
+    return np.array(p_values, dtype=np.float)
 
 
 """

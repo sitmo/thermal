@@ -31,7 +31,14 @@ author = 'Thijs van den Berg'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinx.ext.intersphinx', 'myst_parser']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.intersphinx',
+    'myst_parser',
+    'nbsphinx',
+    'nbsphinx_link',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -39,7 +46,12 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = [
+    '_build',
+    'Thumbs.db',
+    '.DS_Store',
+    '.venv',
+]
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -58,6 +70,7 @@ html_static_path = ['_static']
 master_doc = 'index'
 html_show_copyright = False
 html_show_sphinx = False
+html_sourcelink_suffix = ''
 
 html_theme_options = {
     'logo_only': False,
@@ -71,3 +84,21 @@ html_theme_options = {
     'includehidden': True,
     'titles_only': False,
 }
+
+
+suppress_warnings = [
+    'nbsphinx.localfile',
+    'nbsphinx.gallery',
+    'nbsphinx.thumbnail',
+    'nbsphinx.notebooktitle',
+    'nbsphinx.ipywidgets',
+]
+
+# for matplotlib support
+nbsphinx_execute_arguments = [
+    "--InlineBackend.figure_formats={'svg', 'pdf'}",
+    "--InlineBackend.rc=figure.dpi=96",
+]
+
+nbsphinx_input_prompt = 'In [%s]:'
+nbsphinx_output_prompt = 'Out[%s]:'

@@ -10,6 +10,16 @@ from sklearn.neighbors import KernelDensity
 from thermal.sample._interface import _SampleInterface
 
 
+def _est_kernel_width_1(x):
+    return 1.06 * np.std(x, ddof=1) * len(x) ** -0.2
+
+
+def _est_kernel_width_2(x):
+    a = np.percentile(x, 75) - np.percentile(x, 25)
+    s = np.std(x, ddof=1)
+    return 0.9 * min(s, a / 1.34) * len(x) ** -0.2
+
+
 class SampleKde(_SampleInterface):
     """Resample using Kernel Density estimate.
 
@@ -42,12 +52,10 @@ class SampleKde(_SampleInterface):
         """
         self.n_samples_ = len(x)
         self.x_ = x
-        self.mu_ = np.mean(x)
-        self.sigma_ = np.std(x, ddof=1)
-        self.kernel_width_ = 1.06 * self.sigma_ * len(x) ** -0.2
+        self.kernel_width_ = _est_kernel_width_2(x)
 
-        bandwidths = self.kernel_width_ * np.logspace(-1, 1, 101)
         if self.cv_ is not None:
+            bandwidths = self.kernel_width_ * np.logspace(-1, 1, 101)
             grid = GridSearchCV(KernelDensity(kernel='gaussian'), {'bandwidth': bandwidths}, cv=KFold(self.cv_))
             grid.fit(x.reshape(-1, 1))
             self.kernel_width_ = grid.best_params_['bandwidth']
